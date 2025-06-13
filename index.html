@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Excellent's Graduation Invitation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link href="https://fonts.googleapis.com/css2?family=Lora&family=Playfair+Display&display=swap" rel="stylesheet">
+  <style>
+    * {margin:0; padding:0; box-sizing:border-box;}
+    html, body {
+      height:100%; width:100%; font-family:'Lora', serif; overflow:hidden;
+      background: black;
+    }
+    #loading-screen {
+      position:fixed; z-index:9999; top:0; left:0; width:100%; height:100%;
+      background-color:#000; display:flex; justify-content:center; align-items:center;
+      color:white; font-size:1.5em; font-family:'Playfair Display', serif;
+    }
+    .hide-loading {
+      animation: fadeOut 1s ease-in-out forwards;
+    }
+    @keyframes fadeOut {
+      to { opacity: 0; visibility: hidden; }
+    }
+    .cover, .content {
+      position:fixed; top:0; left:0; width:100vw; height:100vh;
+      background-size:cover; background-position:center;
+      display:flex; flex-direction:column; align-items:center;
+      justify-content:center; text-align:center; padding:20px;
+    }
+    .cover {
+      background-image:url('cover_web.png');
+      z-index:2; opacity:1;
+      transition: opacity 1.2s ease-in-out;
+    }
+    .cover.hide {
+      opacity: 0; pointer-events: none;
+    }
+    .content {
+      background-image:url('background_web.png');
+      z-index:1; color:#f0f0f0; font-family:'Playfair Display', serif;
+      font-size:1.1em; opacity:0; transition:opacity 1.5s ease-in-out;
+    }
+    .content.show {
+      opacity:1;
+    }
+    .btn-enter {
+      margin-top:20px; padding:15px 35px; border:none;
+      border-radius:50px; font-size:1.2em;
+      background:linear-gradient(45deg,#0066cc,#00ccff);
+      color:white; cursor:pointer;
+      box-shadow:0 0 20px rgba(0,204,255,0.7);
+      animation:pulse 2.5s infinite; transition:transform .3s;
+    }
+    .btn-enter:hover {transform:scale(1.1);}
+    @keyframes pulse {
+      0%,100% { box-shadow:0 0 20px rgba(0,204,255,0.7); }
+      50% { box-shadow:0 0 30px rgba(0,255,255,1); }
+    }
+    h1 {color:#e0f7ff;font-size:2.4em;text-shadow:0 0 10px #00ccff;margin-bottom:15px;}
+    h2 {margin-bottom:20px;font-size:1.8em;text-shadow:0 0 5px #ffffff;}
+    p {margin:15px 0;line-height:1.6;text-shadow:0 0 3px #000000;max-width:90vw;}
+    img.logo {
+      width:110px; max-width:35vw; margin-bottom:20px;
+    }
+    canvas {position:absolute; top:0; left:0; z-index:0;}
+    audio {display:none;}
+    @media (max-width: 600px) {
+      h1 { font-size: 1.8em; }
+      h2 { font-size: 1.4em; }
+      .btn-enter { font-size: 1em; padding: 12px 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="loading-screen">Loading Undangan...</div>
+  <audio id="bgm" loop src="Pleasant_Awakening_Medium.mp3"></audio>
+
+  <div class="cover" id="cover">
+    <img src="LOGO_ANGKATAN_web.png" alt="Logo Angkatan" class="logo">
+    <h1>Excellent's Graduation Invitation</h1>
+    <button class="btn-enter" onclick="enterInvitation()">Buka Undangan</button>
+  </div>
+
+  <div class="content" id="content">
+    <canvas id="particles"></canvas>
+    <img src="LOGO_ANGKATAN_web.png" alt="Logo" class="logo">
+    <h2>Khataman &amp; Yudisium Siswa Akhir</h2>
+    <p>📍 <strong>Gedung Serba Berguna Pondok Pesantren</strong><br>
+    📅 <strong>Sabtu, 21 Juni 2025</strong><br>
+    🕘 <strong>07.00 WIB – selesai</strong></p>
+    <p>"Dengan penuh haru dan syukur, kami mengundang Bapak/Ibu untuk menjadi saksi penutup perjalanan anak-anak kita."</p>
+  </div>
+
+  <script>
+    window.addEventListener('load', () => {
+      const loading = document.getElementById('loading-screen');
+      loading.classList.add('hide-loading');
+      setTimeout(() => loading.style.display = 'none', 1000);
+    });
+
+    function enterInvitation() {
+      const cover = document.getElementById('cover');
+      const content = document.getElementById('content');
+      cover.classList.add('hide');
+      content.classList.add('show');
+      document.getElementById('bgm').play().catch(() => {
+        console.log("Autoplay blocked. User interaction required.");
+      });
+      startParticles();
+    }
+
+    function startParticles() {
+      const canvas = document.getElementById('particles');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      let parts = [];
+      for (let i = 0; i < 120; i++) {
+        parts.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 2 + 0.5,
+          sX: (Math.random() - 0.5) * 0.6,
+          sY: (Math.random() - 0.5) * 0.6
+        });
+      }
+      (function anim() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = 'rgba(255,255,255,0.7)';
+        parts.forEach(p => {
+          p.x += p.sX;
+          p.y += p.sY;
+          if (p.x < 0 || p.x > canvas.width) p.sX *= -1;
+          if (p.y < 0 || p.y > canvas.height) p.sY *= -1;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, 2 * Math.PI);
+          ctx.fill();
+        });
+        requestAnimationFrame(anim);
+      })();
+    }
+  </script>
+</body>
+</html>
