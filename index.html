@@ -631,7 +631,22 @@
         display: flex;
       }
     }
-  </style>
+  
+@keyframes logo-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px #00ccff);
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 20px #00ccff);
+    transform: scale(1.05);
+  }
+}
+.cover img {
+  animation: logo-glow 2.5s ease-in-out infinite;
+}
+
+</style>
 </head>
 <body>
   <div id="loading-screen">Loading Undangan...</div>
@@ -658,10 +673,8 @@
       <a href="#gallery-section" tabindex="0"><span class="material-icons" aria-hidden="true">photo_library</span>Galeri<span class="nav-badge" aria-label="5 new photos">5</span></a>
       <a href="#rsvp-section" tabindex="0"><span class="material-icons" aria-hidden="true">edit</span>Konfirmasi</a>
       <a href="#map-section" tabindex="0"><span class="material-icons" aria-hidden="true">location_on</span>Lokasi</a>
-      <a href="https://instagram.com/excellentgeneration" target="_blank" rel="noopener noreferrer" tabindex="0"><span class="material-icons" aria-hidden="true">photo_camera</span>Instagram</a>
-      <a href="https://twitter.com/exgenid" target="_blank" rel="noopener noreferrer" tabindex="0"><span class="material-icons" aria-hidden="true">share</span>Twitter</a>
-      <a href="https://facebook.com/excellentgeneration" target="_blank" rel="noopener noreferrer" tabindex="0"><span class="material-icons" aria-hidden="true">public</span>Facebook</a>
-    </nav>
+      <a href="https://www.instagram.com/excellentgeneration_30/" target="_blank" rel="noopener noreferrer" tabindex="0"><span class="material-icons" aria-hidden="true">photo_camera</span>Instagram</a>
+      <a <a     </nav>
   </aside>
 
   <main id="main-container" tabindex="-1">
@@ -681,18 +694,18 @@
       <p>Sehubungan dengan rangkaian kegiatan siswa/i kelas VI KMI, kami mengundang Bapak/Ibu untuk hadir pada acara Khataman &amp; Yudisium Siswa Akhir KMI Angkatan Ke-30, <strong>Excellent Generation</strong>.</p>
       <p><strong>Hari/Tanggal:</strong> Sabtu, 21 Juni 2025<br />
          <strong>Tempat:</strong> Gedung Serba Guna, Pondok Pesantren Darussalam Bogor<br />
-         <strong>Waktu:</strong> 08.00 WIB – Selesai
+         <strong>Waktu:</strong> 09.00 WIB – Selesai
       </p>
       <p>Demikianlah undangan ini kami sampaikan. Atas kehadiran Bapak/Ibu kami ucapkan terima kasih.<br/><em>NB: Undangan ini hanya untuk 2 orang wali santri.</em></p>
     </section>
 
     <section id="gallery-section" class="glass-card" role="region" aria-label="Event photo gallery">
-      <h2>Kilas Memori Kami</h2>
+      <h2>Galeri Foto</h2>
       
 <div class="gallery" aria-live="polite" aria-relevant="additions">
   <div class="gallery-item" tabindex="0">
-    <img src="Snap1.jpg" alt="AKSARA EXCELLENT GENERATION" loading="lazy" />
-    <div class="gallery-caption">AKSARA 2024</div>
+    <img src="Snap1.jpg" alt="Panggung utama Excellent Generation dengan dekorasi megah" loading="lazy" />
+    <div class="gallery-caption">Panggung Utama</div>
   </div>
   <div class="gallery-item" tabindex="0">
     <img src="Snap2.jpg" alt="Foto organisasi santri putra angkatan 24-25" loading="lazy" />
@@ -703,8 +716,8 @@
     <div class="gallery-caption">Organisasi Putri 24-25</div>
   </div>
   <div class="gallery-item" tabindex="0">
-    <img src="Snap4.jpg" alt="DIRASAH KUTUB AL-ISLAMIYAH" loading="lazy" />
-    <div class="gallery-caption">Kelas 6 KMI - DIRASAH KUTUB AL-ISLAMIYAH</div>
+    <img src="Snap4.jpg" alt="Foto santri kelas 6 KMI di depan asrama dengan backdrop petir" loading="lazy" />
+    <div class="gallery-caption">Kelas 6 KMI - Petir</div>
   </div>
   <div class="gallery-item" tabindex="0">
     <img src="Snap5.jpg" alt="Foto akhir masa ujian tulis angkatan Excellent Generation" loading="lazy" />
@@ -720,7 +733,7 @@
   </div>
   <div class="gallery-item" tabindex="0">
     <img src="Snap8.jpg" alt="Suasana ujian lisan Al-Qur'an, Hadits, dan pelajaran lainnya" loading="lazy" />
-    <div class="gallery-caption">DARSU NAQD AMALIYAH TADRIS</div>
+    <div class="gallery-caption">Munaqosyah Al-Qur’an</div>
   </div>
 </div>
 
@@ -764,13 +777,13 @@
 
     <section id="map-section" class="map-container glass-card" role="region" aria-label="Lokasi Acara">
       <h2>📍 Lokasi Acara</h2>
-      <iframe src="https://maps.google.com/maps?q=pondok%20pesantren%20darussalam%20bogor&t=&z=15&ie=UTF8&iwloc=&output=embed" tabindex="0" loading="lazy" aria-label="Peta lokasi Pondok Pesantren Darussalam Bogor" ></iframe>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.5873569099434!2d106.79305067586426!3d-6.184932460527048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f916dc4ec9fb%3A0x8f3e41d7e2c3a72d!2sPondok%20Pesantren%20Darussalam%20Bogor!5e0!3m2!1sid!2sid!4v1718530000000!5m2!1sid!2sid" tabindex="0" loading="lazy" aria-label="Peta lokasi Pondok Pesantren Darussalam Bogor" ></iframe>
     </section>
   </main>
 
   <footer role="contentinfo">
     <p>&copy; 2025 Excellent Generation | IG: 
-      <a href="https://instagram.com/excellentgeneration" target="_blank" rel="noopener noreferrer">@excellentgeneration</a>
+      <a href="https://www.instagram.com/excellentgeneration_30/" target="_blank" rel="noopener noreferrer">@excellentgeneration_30</a>
     </p>
   </footer>
 
