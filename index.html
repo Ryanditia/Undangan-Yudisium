@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Undangan Khataman & Yudisium - Excellent Generation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora&family=Playfair+Display&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <style>
+    :root {
+      --color-primary-start: #00ccff;
+      --color-primary-end: #0066cc;
+      --color-bg-dark: #000000;
+      --color-bg-light: #f5f7fa;
+      --color-text-light: #f0f8ff;
+      --color-text-dark: #111827;
+      --color-glass-bg: rgba(0, 204, 255, 0.15);
+      --color-glass-border: rgba(0, 204, 255, 0.3);
+      --color-shadow: rgba(0, 204, 255, 0.25);
+      --color-overlay: rgba(0,0,0,0.6);
+      --font-primary: 'Playfair Display', serif;
+      --font-secondary: 'Lora', serif;
+      --transition-duration: 0.3s;
+      --border-radius: 14px;
+      --header-height: 64px;
+      --sidebar-width: 280px;
+      --gap: 20px;
+      --focus-outline: 2px solid var(--color-primary-start);
+    }
+
+    /* Reset & base */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+      font-family: var(--font-primary);
+      background: var(--color-bg-dark);
+      color: var(--color-text-light);
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+    button, input, select, textarea {
+      font-family: inherit;
+      font-size: 1rem;
+      color: inherit;
+    }
+    a {
+      color: var(--color-primary-start);
+      text-decoration: none;
+      cursor: pointer;
+      transition: color var(--transition-duration) ease;
+    }
+    a:hover, a:focus {
+      color: var(--color-primary-end);
+      outline: none;
+    }
+    h1,h2,h3,h4,h5,h6 {
+      font-family: var(--font-secondary);
+    }
+    h1 {
+      font-size: clamp(2.2rem, 4vw, 3rem);
+      font-weight: 900;
+      color: var(--color-primary-start);
+      text-shadow: 0 0 10px var(--color-primary-start);
+    }
+    h2 {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      color: var(--color-primary-end);
+      text-shadow: 0 0 6px rgba(0, 102, 204, 0.5);
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+      line-height: 1.7;
+      margin-bottom: 16px;
+      max-width: 720px;
+      font-weight: 400;
+    }
+    strong {
+      color: var(--color-primary-start);
+      font-weight: 700;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 12px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--color-primary-start);
+      border-radius: 8px;
+      border: 3px solid transparent;
+      background-clip: content-box;
+      transition: background-color 0.3s ease;
+    }
+    ::-webkit-scrollbar-thumb:hover, ::-webkit-scrollbar-thumb:focus {
+      background: var(--color-primary-end);
+    }
+
+    /* Glass Morphism utilities */
+    .glass {
+      background: var(--color-glass-bg);
+      border-radius: var(--border-radius);
+      border: 1.5px solid var(--color-glass-border);
+      backdrop-filter: blur(12px) saturate(180%);
+      box-shadow: 0 8px 32px var(--color-shadow);
+      transition: background-color 0.4s ease;
+    }
+
+    /* Focus style */
+    :focus-visible {
+      outline: var(--focus-outline);
+      outline-offset: 2px;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      height: var(--header-height);
+      width: 100%;
+      background: var(--color-glass-bg);
+      border-bottom: 1px solid var(--color-glass-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      backdrop-filter: blur(16px) saturate(200%);
+      z-index: 10000;
+      box-shadow: 0 2px 8px var(--color-shadow);
+      user-select: none;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo {
+      font-weight: 900;
+      font-size: clamp(1.4rem, 2vw, 1.8rem);
+      background: linear-gradient(90deg, var(--color-primary-start), var(--color-primary-end));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      cursor: pointer;
+      user-select: text;
+    }
+    nav.desktop-nav {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      font-size: clamp(0.85rem, 1vw, 1rem);
+    }
+    nav.desktop-nav a {
+      padding: 8px 12px;
+      border-radius: 10px;
+      transition: background-color 0.3s ease;
+    }
+    nav.desktop-nav a:hover, nav.desktop-nav a:focus {
+      background: linear-gradient(90deg, var(--color-primary-start), var(--color-primary-end));
+      color: #fff;
+    }
+    .theme-toggle-btn {
+      background: none;
+      border: 2px solid var(--color-primary-start);
+      border-radius: 50%;
+      cursor: pointer;
+      padding: 6px;
+      color: var(--color-primary-start);
+      font-size: 24px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      outline-offset: 2px;
+      user-select: none;
+    }
+    .theme-toggle-btn:hover, .theme-toggle-btn:focus {
+      background: var(--color-primary-start);
+      color: #000000;
+    }
+    /* Hamburger menu for mobile */
+    .mobile-menu-btn {
+      display: none;
+      font-size: 32px;
+      background: none;
+      border: none;
+      color: var(--color-primary-start);
+      cursor: pointer;
+    }
+
+    /* Sidebar */
+    #sidebar {
+      position: fixed;
+      top: var(--header-height);
+      left: 0;
+      width: var(--sidebar-width);
+      height: calc(100vh - var(--header-height));
+      background: var(--color-glass-bg);
+      border-right: 1px solid var(--color-glass-border);
+      box-shadow: 2px 0 15px var(--color-shadow);
+      padding: 24px 16px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap);
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: 9999;
+    }
+    #sidebar.hidden {
+      transform: translateX(-100%);
+    }
+    #sidebar nav {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    #sidebar nav a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      color: var(--color-primary-start);
+      font-weight: 600;
+      border-radius: var(--border-radius);
+      transition: background-color 0.3s ease;
+    }
+    #sidebar nav a .material-icons {
+      font-size: 24px;
+      line-height: 1;
+      color: inherit;
+      flex-shrink: 0;
+    }
+    #sidebar nav a:hover, #sidebar nav a:focus {
+      background: var(--color-primary-start);
+      color: #000;
+    }
+    /* Notification badge */
+    .nav-badge {
+      margin-left: auto;
+      background: var(--color-primary-end);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      min-width: 22px;
+      height: 22px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      user-select: none;
+    }
+
+    /* Main content area */
+    main {
+      margin-left: var(--sidebar-width);
+      padding: 32px 48px 96px;
+      min-height: calc(100vh - var(--header-height));
+      background: url('background_web.png') center center / cover no-repeat fixed;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+      transition: margin-left 0.35s ease;
+    }
+    main.full-width {
+      margin-left: 0;
+      padding: 24px 20px 80px;
+    }
+
+    /* Content sections styled as glass cards */
+    section.glass-card {
+      padding: 24px 32px;
+      border-radius: var(--border-radius);
+      background: var(--color-glass-bg);
+      border: 1.5px solid var(--color-glass-border);
+      box-shadow: 0 8px 32px var(--color-shadow);
+      backdrop-filter: blur(14px) saturate(180%);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    section.glass-card:hover, section.glass-card:focus-within {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 48px var(--color-shadow);
+    }
+
+    /* Cover section override hidden by JS */
+    #cover.glass-card {
+      max-width: 480px;
+      margin: 100px auto 0;
+      text-align: center;
+      box-shadow: 0 16px 60px var(--color-shadow);
+    }
+    #cover.glass-card button {
+      margin-top: 24px;
+      padding: 14px 36px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(90deg, var(--color-primary-start), var(--color-primary-end));
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 0 24px var(--color-primary-start);
+      transition: box-shadow 0.3s ease;
+    }
+    #cover.glass-card button:hover, #cover.glass-card button:focus {
+      box-shadow: 0 0 38px var(--color-primary-end);
+    }
+
+    /* Content container */
+    #content {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 36px;
+    }
+    #content.show {
+      display: flex;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    /* RSVP form enhancement */
+    .rsvp form {
+      width: 100%;
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .rsvp input, .rsvp select {
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1.5px solid var(--color-glass-border);
+      background: rgba(255,255,255,0.12);
+      color: var(--color-text-light);
+      font-size: clamp(1rem, 1.5vw, 1.1rem);
+      text-align: center;
+      transition: border-color 0.3s ease;
+      outline-offset: 3px;
+    }
+    .rsvp input:focus, .rsvp select:focus {
+      border-color: var(--color-primary-end);
+      background: rgba(0,204,255,0.25);
+    }
+    .rsvp button {
+      padding: 14px;
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+      border-radius: 10px;
+      border: none;
+      background: linear-gradient(90deg, var(--color-primary-end), var(--color-primary-start));
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 0 20px var(--color-primary-start);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    .rsvp button:hover, .rsvp button:focus {
+      background: linear-gradient(90deg, var(--color-primary-start), var(--color-primary-end));
+      transform: scale(1.05);
+      box-shadow: 0 0 36px var(--color-primary-end);
+    }
+
+    /* Map container */
+    .map-container {
+      width: 100%;
+      max-width: 860px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(0, 204, 255, 0.3);
+      border: 1.5px solid var(--color-glass-border);
+      transition: box-shadow 0.3s ease;
+    }
+    .map-container:hover, .map-container:focus-within {
+      box-shadow: 0 16px 56px rgba(0, 204, 255, 0.6);
+    }
+    iframe {
+      width: 100%;
+      height: 420px;
+      border: none;
+    }
+
+    /* Footer */
+    footer {
+      position: sticky;
+      bottom: 0;
+      width: 100%;
+      background: var(--color-glass-bg);
+      border-top: 1.5px solid var(--color-glass-border);
+      padding: 16px 24px;
+      color: var(--color-primary-start);
+      font-weight: 600;
+      text-align: center;
+      backdrop-filter: blur(16px) saturate(180%);
+      box-shadow: 0 -2px 12px var(--color-shadow);
+      user-select: none;
+      font-size: clamp(0.8rem, 1vw, 1rem);
+      z-index: 1000;
+    }
+    footer a {
+      color: var(--color-primary-end);
+      font-weight: 700;
+      margin-left: 6px;
+      text-decoration: underline;
+    }
+
+    /* Particle Canvas remains fixed and full screen */
+    canvas#particles {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Loading screen */
+    #loading-screen {
+      position: fixed;
+      width: 100%; height: 100%;
+      background: var(--color-bg-dark);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 11000;
+      color: var(--color-primary-start);
+      font-size: clamp(1.25rem, 2vw, 1.75rem);
+      text-shadow: 0 0 15px var(--color-primary-start);
+    }
+    .hide-loading { animation: fadeOut 1s forwards; }
+    @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    /* Cover with override */
+    .cover {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+      margin: 100px auto 0;
+      padding: 20px 30px;
+      box-sizing: border-box;
+      text-align: center;
+      color: var(--color-primary-start);
+      user-select: none;
+      animation: fadeIn 1s ease forwards;
+    }
+    .cover.hide {
+      display: none;
+    }
+    .cover img {
+      width: 120px;
+      margin-bottom: 24px;
+      filter: drop-shadow(0 0 6px var(--color-primary-start));
+    }
+    .cover h1 {
+      font-size: 2.6rem;
+      text-shadow: 0 0 12px var(--color-primary-start);
+      margin-bottom: 12px;
+      font-weight: 900;
+    }
+    .cover p {
+      font-size: 1.3rem;
+      margin-bottom: 24px;
+      font-weight: 600;
+      text-shadow: 0 0 10px var(--color-primary-start);
+    }
+    .cover button {
+      appearance: none;
+      -webkit-appearance: none;
+      border: none;
+      border-radius: 14px;
+      padding: 16px 40px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--color-primary-start), var(--color-primary-end));
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 0 24px var(--color-primary-start);
+      transition: box-shadow 0.3s ease;
+      user-select: none;
+    }
+    .cover button:hover, .cover button:focus {
+      box-shadow: 0 0 38px var(--color-primary-end);
+      outline: none;
+    }
+
+    /* Gallery Section with antimainstream layout - masonry with gaps */
+    .gallery {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+      grid-auto-rows: 180px;
+      grid-auto-flow: dense;
+    }
+    /* Creative gap layout with varied row spans and column spans */
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--border-radius);
+      box-shadow: 0 8px 20px rgba(0,204,255,0.3);
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+      cursor: pointer;
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,0.5));
+      background: var(--color-glass-bg);
+      border: 1.5px solid var(--color-glass-border);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .gallery-item:nth-child(4n) {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+    .gallery-item:nth-child(3n) {
+      grid-column: span 2;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: var(--border-radius);
+      transition: transform 0.4s ease;
+    }
+    .gallery-item:hover img, .gallery-item:focus img {
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 12px var(--color-primary-start));
+      outline: none;
+    }
+    /* Caption overlay */
+    .gallery-caption {
+      position: absolute;
+      bottom: 8px;
+      left: 12px;
+      color: var(--color-primary-start);
+      font-weight: 700;
+      background: rgba(0,0,0,0.4);
+      padding: 4px 8px;
+      border-radius: 8px;
+      backdrop-filter: blur(6px);
+      font-size: clamp(0.75rem, 1vw, 0.9rem);
+      user-select: none;
+      pointer-events: none;
+    }
+
+    /* Responsive Adjustments */
+
+    /* Mobile */
+    @media (max-width: 767px) {
+      /* Close sidebar and enable hamburger */
+      #sidebar {
+        transform: translateX(-100%);
+        position: fixed;
+        top: var(--header-height);
+        left: 0;
+        height: calc(100vh - var(--header-height));
+        width: var(--sidebar-width);
+        z-index: 11000;
+      }
+      #sidebar.visible {
+        transform: translateX(0);
+        box-shadow: 2px 0 32px var(--color-shadow);
+      }
+      main {
+        margin-left: 0 !important;
+        padding: 24px 20px 96px !important;
+      }
+      nav.desktop-nav {
+        display: none;
+      }
+      .mobile-menu-btn {
+        display: inline-block;
+      }
+      /* Bottom navigation */
+      .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 56px;
+        background: var(--color-glass-bg);
+        border-top: 1.5px solid var(--color-glass-border);
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        backdrop-filter: blur(16px) saturate(180%);
+        box-shadow: 0 -2px 12px var(--color-shadow);
+        z-index: 10000;
+      }
+      .bottom-nav button {
+        background: none;
+        border: none;
+        color: var(--color-primary-start);
+        font-size: 28px;
+        cursor: pointer;
+        transition: color 0.3s ease;
+      }
+      .bottom-nav button:hover, .bottom-nav button:focus {
+        color: var(--color-primary-end);
+      }
+      /* Make header justify-content space-between */
+      header {
+        justify-content: space-between;
+      }
+    }
+
+    /* Tablet */
+    @media (min-width: 768px) and (max-width: 1023px) {
+      main {
+        margin-left: calc(var(--sidebar-width) / 2);
+        padding: 32px 32px 88px;
+      }
+      #sidebar {
+        width: calc(var(--sidebar-width) / 2);
+        height: calc(100vh - var(--header-height));
+        top: var(--header-height);
+        position: fixed;
+      }
+      nav.desktop-nav {
+        display: flex;
+        gap: 20px;
+      }
+      .mobile-menu-btn {
+        display: none;
+      }
+    }
+
+    /* Desktop */
+    @media (min-width: 1024px) {
+      main {
+        margin-left: var(--sidebar-width);
+      }
+      nav.desktop-nav {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="loading-screen">Loading Undangan...</div>
+
+  <header role="banner" aria-label="Site header navigation">
+    <div class="header-left">
+      <button type="button" aria-label="Toggle navigation menu" id="mobile-menu-btn" class="mobile-menu-btn material-icons" title="Toggle menu">
+        menu
+      </button>
+      <div class="logo" tabindex="0" role="heading" aria-level="1">Excellent Generation</div>
+    </div>
+    <nav class="desktop-nav" role="navigation" aria-label="Primary navigation">
+      <a href="#content" tabindex="0">Undangan</a>
+      <a href="#gallery-section" tabindex="0">Galeri</a>
+      <a href="#rsvp-section" tabindex="0">Konfirmasi</a>
+      <a href="#map-section" tabindex="0">Lokasi</a>
+    </nav>
+    <button id="theme-toggle-btn" aria-label="Toggle light and dark theme" class="theme-toggle-btn material-icons" title="Switch theme" tabindex="0">dark_mode</button>
+  </header>
+
+  <aside id="sidebar" aria-label="Contextual navigation sidebar" class="glass" role="complementary" tabindex="-1">
+    <nav>
+      <a href="#content" tabindex="0"><span class="material-icons" aria-hidden="true">event</span>Undangan</a>
+      <a href="#gallery-section" tabindex="0"><span class="material-icons" aria-hidden="true">photo_library</span>Galeri<span class="nav-badge" aria-label="5 new photos">5</span></a>
+      <a href="#rsvp-section" tabindex="0"><span class="material-icons" aria-hidden="true">edit</span>Konfirmasi</a>
+      <a href="#map-section" tabindex="0"><span class="material-icons" aria-hidden="true">location_on</span>Lokasi</a>
+      <a href="https://instagram.com/excellentgeneration" target="_blank" rel="noopener noreferrer" tabindex="0"><span class="material-icons" aria-hidden="true">photo_camera</span>Instagram</a>
+      <a href="https://twitter.com/exgenid" target="_blank" rel="noopener noreferrer" tabindex="0"><span class="material-icons" aria-hidden="true">share</span>Twitter</a>
+      <a href="https://facebook.com/excellentgeneration" target="_blank" rel="noopener noreferrer" tabindex="0"><span class="material-icons" aria-hidden="true">public</span>Facebook</a>
+    </nav>
+  </aside>
+
+  <main id="main-container" tabindex="-1">
+    <section id="cover" class="cover glass-card" role="region" aria-label="Opening invitation screen">
+      <img src="LOGO_ANGKATAN_web.png" alt="Logo Excellent Generation with blue glowing effect" />
+        <h1>Undangan Khataman &amp; Yudisium</h1>
+      <p>Kepada Yth: Bapak/Ibu Wali Santri Siswa Akhir KMI 2025</p>
+      <button type="button" id="enter-btn" aria-describedby="enter-desc" aria-haspopup="true" aria-controls="content">
+        Buka Undangan
+      </button>
+      <p id="enter-desc" class="sr-only">Tekan untuk membuka undangan dan melihat detail acara.</p>
+    </section>
+
+    <section id="content" class="glass-card" role="main" aria-label="Invitation content" tabindex="0" aria-live="polite" aria-atomic="true">
+      <h2>Assalamu’alaikum Warahmatullahi Wabarakatuh</h2>
+      <p>Alhamdulillah, keluarga besar Pondok Pesantren Darussalam Bogor dalam keadaan sehat wal ‘afiyat. Semoga demikian pula keadaan Bapak/Ibu/Wali Santri. Aamiin.</p>
+      <p>Sehubungan dengan rangkaian kegiatan siswa/i kelas VI KMI, kami mengundang Bapak/Ibu untuk hadir pada acara Khataman &amp; Yudisium Siswa Akhir KMI Angkatan Ke-30, <strong>Excellent Generation</strong>.</p>
+      <p><strong>Hari/Tanggal:</strong> Sabtu, 21 Juni 2025<br />
+         <strong>Tempat:</strong> Gedung Serba Guna, Pondok Pesantren Darussalam Bogor<br />
+         <strong>Waktu:</strong> 09.00 WIB – Selesai
+      </p>
+      <p>Demikianlah undangan ini kami sampaikan. Atas kehadiran Bapak/Ibu kami ucapkan terima kasih.<br/><em>NB: Undangan ini hanya untuk 2 orang wali santri.</em></p>
+    </section>
+
+    <section id="gallery-section" class="glass-card" role="region" aria-label="Event photo gallery">
+      <h2>Galeri Foto</h2>
+      
+<div class="gallery" aria-live="polite" aria-relevant="additions">
+  <div class="gallery-item" tabindex="0">
+    <img src="Snap1.jpg" alt="Panggung utama Excellent Generation dengan dekorasi megah" loading="lazy" />
+    <div class="gallery-caption">Panggung Utama</div>
+  </div>
+  <div class="gallery-item" tabindex="0">
+    <img src="Snap2.jpg" alt="Foto organisasi santri putra angkatan 24-25" loading="lazy" />
+    <div class="gallery-caption">Organisasi Putra 24-25</div>
+  </div>
+  <div class="gallery-item" tabindex="0">
+    <img src="Snap3.jpg" alt="Foto organisasi santri putri angkatan 24-25" loading="lazy" />
+    <div class="gallery-caption">Organisasi Putri 24-25</div>
+  </div>
+  <div class="gallery-item" tabindex="0">
+    <img src="Snap4.jpg" alt="Foto santri kelas 6 KMI di depan asrama dengan backdrop petir" loading="lazy" />
+    <div class="gallery-caption">Kelas 6 KMI - Petir</div>
+  </div>
+  <div class="gallery-item" tabindex="0">
+    <img src="Snap5.jpg" alt="Foto akhir masa ujian tulis angkatan Excellent Generation" loading="lazy" />
+    <div class="gallery-caption">Ujian Tulis</div>
+  </div>
+  <div class="gallery-item" tabindex="0">
+    <img src="Snap6.jpg" alt="Foto di Dataran Drajat Pass, Garut saat rihlah angkatan" loading="lazy" />
+    <div class="gallery-caption">Rihlah Angkatan</div>
+  </div>
+  <div class="gallery-item" tabindex="0">
+    <img src="Snap7.jpg" alt="Santri saat ujian lisan (munaqosyah) akhir" loading="lazy" />
+    <div class="gallery-caption">Ujian Lisan</div>
+  </div>
+  <div class="gallery-item" tabindex="0">
+    <img src="Snap8.jpg" alt="Suasana ujian lisan Al-Qur'an, Hadits, dan pelajaran lainnya" loading="lazy" />
+    <div class="gallery-caption">Munaqosyah Al-Qur’an</div>
+  </div>
+</div>
+
+</section>
+
+    <section id="rsvp-section" class="rsvp glass-card" aria-label="Konfirmasi Kehadiran" role="region">
+      <h2>📝 Konfirmasi Kehadiran (RSVP)</h2>
+      <form id="rsvpForm" novalidate aria-live="polite" aria-relevant="additions" aria-describedby="rsvpStatus" action="#">
+        <input
+          type="text"
+          id="name"
+          name="name"
+          aria-required="true"
+          aria-describedby="nameError"
+          placeholder="Nama Lengkap"
+          autocomplete="name"
+          required
+          minlength="2"
+          maxlength="50"
+          pattern="^[A-Za-zÀ-ÿ '.,-]{2,50}$"
+        />
+        <span class="sr-only" id="nameError">Nama harus diisi dan minimal 2 karakter</span>
+
+        <select
+          id="guestCount"
+          name="guestCount"
+          aria-required="true"
+          aria-describedby="guestError"
+          required
+        >
+          <option value="" disabled selected>Jumlah Wali yang Hadir</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+        </select>
+        <span class="sr-only" id="guestError">Harap memilih jumlah wali yang hadir</span>
+
+        <button type="submit" aria-describedby="rsvpStatus">Kirim</button>
+      </form>
+      <div id="rsvpStatus" role="alert" aria-live="assertive" aria-atomic="true" style="margin-top:8px; font-weight:700;"></div>
+    </section>
+
+    <section id="map-section" class="map-container glass-card" role="region" aria-label="Lokasi Acara">
+      <h2>📍 Lokasi Acara</h2>
+      <iframe src="https://maps.google.com/maps?q=pondok%20pesantren%20darussalam%20bogor&t=&z=15&ie=UTF8&iwloc=&output=embed" tabindex="0" loading="lazy" aria-label="Peta lokasi Pondok Pesantren Darussalam Bogor" ></iframe>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <p>&copy; 2025 Excellent Generation | IG: 
+      <a href="https://instagram.com/excellentgeneration" target="_blank" rel="noopener noreferrer">@excellentgeneration</a>
+    </p>
+  </footer>
+
+  <audio id="bgm" src="Pleasant_Awakening_Medium.mp3" loop autoplay></audio>
+  <canvas id="particles"></canvas>
+
+<script>
+  (() => {
+    // Responsive sidebar toggle
+    const sidebar = document.getElementById('sidebar');
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mainContainer = document.getElementById('main-container');
+    const themeToggleBtn = document.getElementById('theme-toggle-btn');
+    const enterBtn = document.getElementById('enter-btn');
+    const cover = document.getElementById('cover');
+    const content = document.getElementById('content');
+    const bgm = document.getElementById('bgm');
+
+    let darkMode = true; // Default dark
+
+    mobileMenuBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('visible');
+      mobileMenuBtn.setAttribute('aria-expanded', sidebar.classList.contains('visible'));
+    });
+
+    themeToggleBtn.addEventListener('click', () => {
+      darkMode = !darkMode;
+      if (darkMode) {
+        document.documentElement.style.setProperty('--color-bg-dark', '#000000');
+        document.documentElement.style.setProperty('--color-text-light', '#f0f8ff');
+        document.documentElement.style.setProperty('--color-glass-bg', 'rgba(0, 204, 255, 0.15)');
+        document.documentElement.style.setProperty('--color-glass-border', 'rgba(0, 204, 255, 0.3)');
+        themeToggleBtn.textContent = 'dark_mode';
+      } else {
+        document.documentElement.style.setProperty('--color-bg-dark', '#f5f7fa');
+        document.documentElement.style.setProperty('--color-text-light', '#111827');
+        document.documentElement.style.setProperty('--color-glass-bg', 'rgba(255 255 255 / 0.65)');
+        document.documentElement.style.setProperty('--color-glass-border', 'rgba(204 204 255 / 0.5)');
+        themeToggleBtn.textContent = 'light_mode';
+      }
+    });
+
+    enterBtn.addEventListener('click', () => {
+      cover.classList.add('hide');
+      content.classList.add('show');
+      document.body.style.overflowY = 'auto';
+      bgm.play().catch(() => {});
+      generateParticles();
+      animateParticles();
+      content.focus();
+    });
+
+    // Particle animation adapted from original
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function generateParticles() {
+      resizeCanvas();
+      particles = Array.from({ length: 120 }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 2.2 + 1.5,
+        dx: (Math.random() - 0.5) * 0.6,
+        dy: (Math.random() - 0.5) * 0.6
+      }));
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0, 204, 255, 0.7)';
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+        p.x += p.dx; p.y += p.dy;
+        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+      });
+      requestAnimationFrame(animateParticles);
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+
+    window.addEventListener('load', () => {
+      document.getElementById('loading-screen').classList.add('hide-loading');
+      setTimeout(() => {document.getElementById('loading-screen').style.display = 'none'; }, 1000);
+    });
+
+    /* RSVP form validation and submission */
+    const rsvpForm = document.getElementById('rsvpForm');
+    const rsvpStatus = document.getElementById('rsvpStatus');
+    rsvpForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const name = rsvpForm.name.value.trim();
+      const guestCount = rsvpForm.guestCount.value;
+      rsvpStatus.textContent = '';
+      // Simple validation
+      if(name.length < 2) {
+        rsvpStatus.textContent = 'Nama minimal 2 karakter.';
+        rsvpForm.name.focus();
+        return;
+      }
+      if(!guestCount) {
+        rsvpStatus.textContent = 'Harap memilih jumlah wali yang hadir.';
+        rsvpForm.guestCount.focus();
+        return;
+      }
+      // Simulate submit with optimistic feedback
+      rsvpStatus.textContent = 'Terima kasih telah mengonfirmasi kehadiran.';
+      rsvpForm.reset();
+    });
+
+  })();
+</script>
+</body>
+</html>
+
