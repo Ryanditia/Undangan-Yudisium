@@ -12,7 +12,7 @@
       --color-primary-end: #0066cc;
       --color-bg-dark: #000000;
       --color-bg-light: #f5f7fa;
-      --color-text-light: #f0f8ff;
+      --color-text-light: #ffffff; /* text color white */
       --color-text-dark: #111827;
       --color-glass-bg: rgba(0, 204, 255, 0.15);
       --color-glass-border: rgba(0, 204, 255, 0.3);
@@ -26,6 +26,9 @@
       --sidebar-width: 280px;
       --gap: 20px;
       --focus-outline: 2px solid var(--color-primary-start);
+
+      --gold-gradient-start: #FFD700;
+      --gold-gradient-end: #FFA500;
     }
 
     /* Reset & base */
@@ -43,7 +46,7 @@
     button, input, select, textarea {
       font-family: inherit;
       font-size: 1rem;
-      color: inherit;
+      color: var(--color-text-light);
     }
     a {
       color: var(--color-primary-start);
@@ -55,31 +58,47 @@
       color: var(--color-primary-end);
       outline: none;
     }
-    h1,h2,h3,h4,h5,h6 {
+
+    /* Headings with glowing gold gradient */
+    h1, h2, h3, h4, h5, h6 {
       font-family: var(--font-secondary);
+      background: linear-gradient(90deg, var(--gold-gradient-start), var(--gold-gradient-end));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      text-shadow:
+        0 0 7px var(--gold-gradient-start),
+        0 0 15px var(--gold-gradient-end),
+        0 0 20px var(--gold-gradient-start),
+        0 0 30px var(--gold-gradient-end),
+        0 0 40px var(--gold-gradient-start);
+      margin-bottom: 10px;
     }
+    /* Individual heading font sizes */
     h1 {
       font-size: clamp(2.2rem, 4vw, 3rem);
       font-weight: 900;
-      color: var(--color-primary-start);
-      text-shadow: 0 0 10px var(--color-primary-start);
+      margin-bottom: 16px;
     }
     h2 {
       font-size: clamp(1.8rem, 3vw, 2.4rem);
-      color: var(--color-primary-end);
-      text-shadow: 0 0 6px rgba(0, 102, 204, 0.5);
-      margin-bottom: 10px;
+      font-weight: 700;
     }
+
     p {
       font-size: clamp(1rem, 1.5vw, 1.2rem);
       line-height: 1.7;
       margin-bottom: 16px;
       max-width: 720px;
       font-weight: 400;
+      color: var(--color-text-light);
     }
     strong {
-      color: var(--color-primary-start);
+      color: var(--gold-gradient-start);
       font-weight: 700;
+      text-shadow:
+        0 0 5px var(--gold-gradient-start),
+        0 0 10px var(--gold-gradient-end);
     }
 
     /* Scrollbar */
@@ -108,6 +127,7 @@
       backdrop-filter: blur(12px) saturate(180%);
       box-shadow: 0 8px 32px var(--color-shadow);
       transition: background-color 0.4s ease;
+      color: var(--color-text-light);
     }
 
     /* Focus style */
@@ -132,6 +152,7 @@
       z-index: 10000;
       box-shadow: 0 2px 8px var(--color-shadow);
       user-select: none;
+      color: var(--color-text-light);
     }
     .header-left {
       display: flex;
@@ -152,11 +173,13 @@
       gap: 18px;
       align-items: center;
       font-size: clamp(0.85rem, 1vw, 1rem);
+      color: var(--color-text-light);
     }
     nav.desktop-nav a {
       padding: 8px 12px;
       border-radius: 10px;
       transition: background-color 0.3s ease;
+      color: var(--color-text-light);
     }
     nav.desktop-nav a:hover, nav.desktop-nav a:focus {
       background: linear-gradient(90deg, var(--color-primary-start), var(--color-primary-end));
@@ -205,6 +228,7 @@
       gap: var(--gap);
       transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
       z-index: 9999;
+      color: var(--color-text-light);
     }
     #sidebar.hidden {
       transform: translateX(-100%);
@@ -262,6 +286,7 @@
       flex-direction: column;
       gap: 48px;
       transition: margin-left 0.35s ease;
+      color: var(--color-text-light);
     }
     main.full-width {
       margin-left: 0;
@@ -277,6 +302,7 @@
       box-shadow: 0 8px 32px var(--color-shadow);
       backdrop-filter: blur(14px) saturate(180%);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      color: var(--color-text-light);
     }
     section.glass-card:hover, section.glass-card:focus-within {
       transform: translateY(-8px);
@@ -289,6 +315,7 @@
       margin: 100px auto 0;
       text-align: center;
       box-shadow: 0 16px 60px var(--color-shadow);
+      color: var(--color-text-light);
     }
     #cover.glass-card button {
       margin-top: 24px;
@@ -312,6 +339,7 @@
       flex-direction: column;
       align-items: center;
       gap: 36px;
+      color: var(--color-text-light);
     }
     #content.show {
       display: flex;
@@ -367,6 +395,7 @@
       box-shadow: 0 12px 40px rgba(0, 204, 255, 0.3);
       border: 1.5px solid var(--color-glass-border);
       transition: box-shadow 0.3s ease;
+      color: var(--color-text-light);
     }
     .map-container:hover, .map-container:focus-within {
       box-shadow: 0 16px 56px rgba(0, 204, 255, 0.6);
@@ -436,7 +465,7 @@
       padding: 20px 30px;
       box-sizing: border-box;
       text-align: center;
-      color: var(--color-primary-start);
+      color: var(--color-text-light);
       user-select: none;
       animation: fadeIn 1s ease forwards;
     }
@@ -489,6 +518,7 @@
       gap: 18px;
       grid-auto-rows: 180px;
       grid-auto-flow: dense;
+      color: var(--color-text-light);
     }
     /* Creative gap layout with varied row spans and column spans */
     .gallery-item {
@@ -694,7 +724,7 @@
       <p>Sehubungan dengan rangkaian kegiatan siswa/i kelas VI KMI, kami mengundang Bapak/Ibu untuk hadir pada acara Khataman &amp; Yudisium Siswa Akhir KMI Angkatan Ke-30, <strong>Excellent Generation</strong>.</p>
       <p><strong>Hari/Tanggal:</strong> Sabtu, 21 Juni 2025<br />
          <strong>Tempat:</strong> Gedung Serba Guna, Pondok Pesantren Darussalam Bogor<br />
-         <strong>Waktu:</strong> 09.00 WIB – Selesai
+         <strong>Waktu:</strong> 07.00 WIB – Selesai
       </p>
       <p>Demikianlah undangan ini kami sampaikan. Atas kehadiran Bapak/Ibu kami ucapkan terima kasih.<br/><em>NB: Undangan ini hanya untuk 2 orang wali santri.</em></p>
     </section>
@@ -705,7 +735,7 @@
 <div class="gallery" aria-live="polite" aria-relevant="additions">
   <div class="gallery-item" tabindex="0">
     <img src="Snap1.jpg" alt="Panggung utama Excellent Generation dengan dekorasi megah" loading="lazy" />
-    <div class="gallery-caption">Panggung Utama</div>
+    <div class="gallery-caption">AKSARA 2024</div>
   </div>
   <div class="gallery-item" tabindex="0">
     <img src="Snap2.jpg" alt="Foto organisasi santri putra angkatan 24-25" loading="lazy" />
@@ -717,11 +747,11 @@
   </div>
   <div class="gallery-item" tabindex="0">
     <img src="Snap4.jpg" alt="Foto santri kelas 6 KMI di depan asrama dengan backdrop petir" loading="lazy" />
-    <div class="gallery-caption">Kelas 6 KMI - Petir</div>
+    <div class="gallery-caption">Kelas 6 KMI - DIRASAH KUTUB AL ISLAMIYAH</div>
   </div>
   <div class="gallery-item" tabindex="0">
     <img src="Snap5.jpg" alt="Foto akhir masa ujian tulis angkatan Excellent Generation" loading="lazy" />
-    <div class="gallery-caption">Ujian Tulis</div>
+    <div class="gallery-caption">Ujian Akhir Gelombang 1</div>
   </div>
   <div class="gallery-item" tabindex="0">
     <img src="Snap6.jpg" alt="Foto di Dataran Drajat Pass, Garut saat rihlah angkatan" loading="lazy" />
@@ -729,11 +759,11 @@
   </div>
   <div class="gallery-item" tabindex="0">
     <img src="Snap7.jpg" alt="Santri saat ujian lisan (munaqosyah) akhir" loading="lazy" />
-    <div class="gallery-caption">Ujian Lisan</div>
+    <div class="gallery-caption">Ujian Akhir Gelombang 2</div>
   </div>
   <div class="gallery-item" tabindex="0">
     <img src="Snap8.jpg" alt="Suasana ujian lisan Al-Qur'an, Hadits, dan pelajaran lainnya" loading="lazy" />
-    <div class="gallery-caption">Munaqosyah Al-Qur’an</div>
+    <div class="gallery-caption">DARSU NAQD AMALIYAH TADRIS</div>
   </div>
 </div>
 
@@ -813,7 +843,7 @@
       darkMode = !darkMode;
       if (darkMode) {
         document.documentElement.style.setProperty('--color-bg-dark', '#000000');
-        document.documentElement.style.setProperty('--color-text-light', '#f0f8ff');
+        document.documentElement.style.setProperty('--color-text-light', '#ffffff');
         document.documentElement.style.setProperty('--color-glass-bg', 'rgba(0, 204, 255, 0.15)');
         document.documentElement.style.setProperty('--color-glass-border', 'rgba(0, 204, 255, 0.3)');
         themeToggleBtn.textContent = 'dark_mode';
