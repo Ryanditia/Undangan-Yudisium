@@ -59,32 +59,30 @@
       outline: none;
     }
 
-    /* Headings with glowing gold gradient */
-    h1, h2, h3, h4, h5, h6 {
-      font-family: var(--font-secondary);
-      background: linear-gradient(90deg, var(--gold-gradient-start), var(--gold-gradient-end));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      color: transparent;
-      text-shadow:
-        0 0 7px var(--gold-gradient-start),
-        0 0 15px var(--gold-gradient-end),
-        0 0 20px var(--gold-gradient-start),
-        0 0 30px var(--gold-gradient-end),
-        0 0 40px var(--gold-gradient-start);
-      margin-bottom: 10px;
-    }
-    /* Individual heading font sizes */
-    h1 {
-      font-size: clamp(2.2rem, 4vw, 3rem);
-      font-weight: 900;
-      margin-bottom: 16px;
-    }
-    h2 {
-      font-size: clamp(1.8rem, 3vw, 2.4rem);
-      font-weight: 700;
-    }
+  h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-secondary);
+  font-weight: 700;
+  color: white;
+  background: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: unset;
+  text-shadow: none;
+  margin-bottom: 10px;
+}
 
+h1 {
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  font-weight: 900;
+  margin-bottom: 16px;
+}
+
+h2 {
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 700;
+}#content h2:first-of-type {
+  font-size: 1.2rem;
+  white-space: nowrap;
+}
     p {
       font-size: clamp(1rem, 1.5vw, 1.2rem);
       line-height: 1.7;
@@ -93,14 +91,11 @@
       font-weight: 400;
       color: var(--color-text-light);
     }
-    strong {
-      color: var(--gold-gradient-start);
-      font-weight: 700;
-      text-shadow:
-        0 0 5px var(--gold-gradient-start),
-        0 0 10px var(--gold-gradient-end);
-    }
-
+   strong {
+  color: white;
+  font-weight: 700;
+  text-shadow: none;
+    }	
     /* Scrollbar */
     ::-webkit-scrollbar {
       width: 12px;
@@ -724,9 +719,9 @@
       <p>Sehubungan dengan rangkaian kegiatan siswa/i kelas VI KMI, kami mengundang Bapak/Ibu untuk hadir pada acara Khataman &amp; Yudisium Siswa Akhir KMI Angkatan Ke-30, <strong>Excellent Generation</strong>.</p>
       <p><strong>Hari/Tanggal:</strong> Sabtu, 21 Juni 2025<br />
          <strong>Tempat:</strong> Gedung Serba Guna, Pondok Pesantren Darussalam Bogor<br />
-         <strong>Waktu:</strong> 07.00 WIB – Selesai
+         <strong>Waktu:</strong> 09.00 WIB – Selesai
       </p>
-      <p>Demikianlah undangan ini kami sampaikan. Atas kehadiran Bapak/Ibu kami ucapkan terima kasih.<br/><em>NB: Undangan ini hanya untuk 2 orang wali santri.</em></p>
+      <p>Demikianlah undangan ini kami sampaikan. Atas kehadiran Bapak/Ibu kami ucapkan terima kasih.<br/><em><strong>NB: Undangan ini hanya untuk 2 orang wali santri.</strong></em>
     </section>
 
     <section id="gallery-section" class="glass-card" role="region" aria-label="Event photo gallery">
@@ -810,12 +805,6 @@
       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.5873569099434!2d106.79305067586426!3d-6.184932460527048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f916dc4ec9fb%3A0x8f3e41d7e2c3a72d!2sPondok%20Pesantren%20Darussalam%20Bogor!5e0!3m2!1sid!2sid!4v1718530000000!5m2!1sid!2sid" tabindex="0" loading="lazy" aria-label="Peta lokasi Pondok Pesantren Darussalam Bogor" ></iframe>
     </section>
   </main>
-
-  <footer role="contentinfo">
-    <p>&copy; 2025 Excellent Generation | IG: 
-      <a href="https://www.instagram.com/excellentgeneration_30/" target="_blank" rel="noopener noreferrer">@excellentgeneration_30</a>
-    </p>
-  </footer>
 
   <audio id="bgm" src="Pleasant_Awakening_Medium.mp3" loop autoplay></audio>
   <canvas id="particles"></canvas>
